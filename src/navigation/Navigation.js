@@ -22,6 +22,8 @@ export default function Navigation() {
                 tabBarIcon: ({ color, size }) => (
                     <Icon name="user" color={color} size={size} />
                 ),
+                headerTitle: 'My Account',
+                headerTitleAlign: 'center',
                 }} 
         />
         <Tab.Screen 
@@ -31,6 +33,7 @@ export default function Navigation() {
                 tabBarLabel: '',
                 tabBarIcon: () => ( renderPokeball() 
                 ),
+                headerTitleAlign: 'center',
             }}
         />
         <Tab.Screen 
@@ -41,6 +44,7 @@ export default function Navigation() {
                 tabBarIcon: ({ color, size }) => (
                     <Icon name="heart" color={color} size={size} />
                 ),
+                headerTitleAlign: 'center',
             }}
         />
       </Tab.Navigator>
