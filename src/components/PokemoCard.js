@@ -1,8 +1,13 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native';
+import getColorByPokemonType from '../utils/getColorByPokemonType';
 
 export default function PokemonCard(props) {
     const { pokemon } = props;
+
+    const pokemonColor = getColorByPokemonType(pokemon.types);
+    const bgStyles = { ...styles.bgStyle, backgroundColor: pokemonColor };
+    const pokeName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
 
     const goToPokemon = () => {
         console.log('goToPokemon -> pokemon', pokemon);
@@ -12,12 +17,12 @@ export default function PokemonCard(props) {
         <TouchableWithoutFeedback onPress={goToPokemon}>
             <View style={styles.card}>
                 <View style={styles.spacing}>
-                    <View style={styles.bgStyle}>
+                    <View style={bgStyles}>
                         <Text style={styles.id}>
-                            #{`00${pokemon.id}`.slice(-3)} - {pokemon.types}
+                            #{`00${pokemon.id}`.slice(-3)}
                         </Text>
                         <Text style={styles.name}>
-                            {pokemon.name}
+                            {pokeName}
                         </Text>
                         <Image
                             source={{ uri: pokemon.image }}
@@ -40,7 +45,9 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     bgStyle: {
-        backgroundColor: '#f8f',
+        flex: 1,
+        borderRadius: 15,
+        padding: 10,
     },
     image: {
         position: 'absolute',
@@ -51,14 +58,14 @@ const styles = StyleSheet.create({
     },
     name: {
         color: '#fff',
-        fontSize: 30,
+        fontSize: 20,
         fontWeight: 'bold',
         paddingTop: 10,
     },
     id: {
         position: 'absolute',
         color: '#fff',
-        fontSize: 20,
+        fontSize: 15,
         fontWeight: 'bold',
         right: 10,
         top: 10,
