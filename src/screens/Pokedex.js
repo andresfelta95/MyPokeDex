@@ -1,11 +1,7 @@
 import * as React from 'react';
-import {SafeAreaView, Text, Button} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import Pokemon from './Pokemon';
+import {SafeAreaView, Text, } from 'react-native';
 
-export default function Pokedex() {
-  const navigation = useNavigation();
-
+export default function Pokemon() {
   return (
     <SafeAreaView>
       <Text>Pokedex Page 🧑🏽‍💻</Text>
