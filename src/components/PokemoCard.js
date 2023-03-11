@@ -48,6 +48,11 @@ const styles = StyleSheet.create({
         flex: 1,
         borderRadius: 15,
         padding: 10,
+        shadowRadius: 20,
+        shadowColor: '#000',
+        shadowOpacity: 0.5,
+        shadowOffset: { width: 0, height: 0 },
+        elevation: 5,
     },
     image: {
         position: 'absolute',

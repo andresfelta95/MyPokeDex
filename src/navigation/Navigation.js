@@ -33,9 +33,7 @@ export default function Navigation() {
                 tabBarLabel: '',
                 tabBarIcon: () => ( renderPokeball() 
                 ),
-                title: '',
                 headerTitleAlign: 'center',
-                headerTransparent: true,
             }}
         />
         <Tab.Screen 
