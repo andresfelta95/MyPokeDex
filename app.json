@@ -4,7 +4,7 @@
     "slug": "MyPokeDex",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "/src/assets/pokeball.png",
+    "icon": "./src/assets/pokeball.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",

@@ -1,22 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import {SafeAreaView } from 'react-native';
-import { getPokemon, getPokemonDetailsApi } from "../api/pokemon";
+import { getPokemonsApi, getPokemonDetailsApi } from "../api/pokemon";
 import PokemonList from "../components/PokemonList";
 
 export default function Pokemon() {
   const [pokemons, setPokemons] = useState([]);
+  const [nextPageUrl, setNextPageUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
-      await loadPokemon();
+      await loadPokemons();
     })();
   }, []);
 
-  const  loadPokemon = async () => {
+  const  loadPokemons = async () => {
     try {
-      const response = await getPokemon();
-      console.log(response.results);
-
+      // Return if loading
+      if (loading) return null;
+      // Get pokemons
+      const response = await getPokemonsApi(nextPageUrl);
+      // Set loading to true
+      setLoading(true);
+      // Set next page url
+      setNextPageUrl(response.next);
+      // Get pokemons details
       const pokemonList = [];
       for await (const pokemon of response.results) {
         const pokemonDetails = await getPokemonDetailsApi(pokemon.url);
@@ -30,14 +38,19 @@ export default function Pokemon() {
         });
       }
 
-      setPokemons([...pokemons, ...pokemonList]);      
+      setPokemons([...pokemons, ...pokemonList]);
+      setLoading(false);
     } catch (error) {
       console.log('loadPokemon', error);
     }
   };
   return (
     <SafeAreaView>
-      <PokemonList pokemons={pokemons} />
+      <PokemonList 
+        pokemons={pokemons} 
+        loadPokemons={loadPokemons}
+        isNext={nextPageUrl}
+      />
     </SafeAreaView>
   );
 }
