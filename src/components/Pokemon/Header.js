@@ -35,18 +35,6 @@ export default function Header(props) {
                 source={{ uri: image }}
                 style={styles.image}
             />
-            <SafeAreaView style={styles.types}>
-                {types.map((type, index) => {
-                    return (
-                        <Text
-                            key={index}
-                            style={{ ...styles.type, backgroundColor: colors[index] }}
-                        >
-                            {type.type.name}
-                        </Text>                        
-                    );
-                })}
-            </SafeAreaView>
         </SafeAreaView>
     );
     }
@@ -61,7 +49,8 @@ const styles = StyleSheet.create({
     bgStyle: {
         position: 'absolute',
         width: '100%',
-        height: 600,
+        height: 400,
+        top: 0,
         borderBottomLeftRadius: 300,
         borderBottomRightRadius: 300,
         shadowRadius: 300,
@@ -85,42 +74,19 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         marginTop: 10,
+        color: 'white',
     },
     order: {
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center',
         marginTop: 10,
+        color: 'white',
     },
     image: {
-        width: 400,
-        height: 400,
+        width: 300,
+        height: 300,
         alignSelf: 'center',
         marginTop: 10,
-    },
-    types: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        marginTop: 10,
-        borderColor: 'silver',
-        borderWidth: 1,
-        borderRadius: 30,
-        paddingVertical: 5,
-        paddingHorizontal: 10,
-        shadowColor: '#000',
-        shadowOpacity: 0.5,
-        shadowOffset: { width: 0, height: 0 },
-        elevation: 5,
-    },
-    type: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        paddingVertical: 5,
-        paddingHorizontal: 10,
-        borderRadius: 30,
-        shadowColor: '#000',
-        shadowOpacity: 0.5,
-        shadowOffset: { width: 0, height: 0 },
-        elevation: 5,
     },
 });
