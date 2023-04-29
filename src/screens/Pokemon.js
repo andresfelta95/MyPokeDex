@@ -1,11 +1,13 @@
 import * as React from 'react';
-import { SafeAreaView, Text } from 'react-native';
+import { ScrollView } from 'react-native';
 //  Get the pokemon details by id
 import { getPokemonDetailsByIdApi } from '../api/pokemon';
+//  Import components
+import Header from '../components/Pokemon/Header';
 
 export default function Pokemon(props) {
   const { navigation, route } = props;
-  const {id , name} = route.params;
+  const {id} = route.params;
 
   const [pokemon, setPokemon] = React.useState(null);
 
@@ -19,13 +21,18 @@ export default function Pokemon(props) {
       }
     })();
   }, [route.params]);
-  console.log(pokemon);
 
   if (!pokemon) return null;
 
   return (
-    <SafeAreaView>
-      <Text>Pokemon {pokemon.name}</Text>
-    </SafeAreaView>
+    <ScrollView>
+      <Header 
+        name={pokemon.name}
+        types={pokemon.types}
+        id={pokemon.id}
+        image={pokemon.sprites.other['official-artwork'].front_default}
+        order={pokemon.order}
+      />
+    </ScrollView>
   );
 }
