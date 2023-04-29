@@ -23,7 +23,7 @@ export default function Types(props) {
                         key={index}
                         style={{ ...styles.type, backgroundColor: colors[index] }}
                     >
-                        {type.type.name}
+                        {type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}
                     </Text>                        
                 );
             })}
