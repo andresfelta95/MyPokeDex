@@ -6,8 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 //  Import screens
 import Account from '../screens/Account';
 import Favorites from '../screens/Favorites';
-//import PokedexNavigation from './PokedexNavigation';
-import Pokedex from '../screens/Pokedex';
+import PokedexNavigation from './PokedexNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,11 +25,12 @@ export default function Navigation() {
                 headerTitleAlign: 'center',
                 }} 
         />
-        <Tab.Screen 
-            name="Pokedex" 
-            component={Pokedex}
+        <Tab.Screen
+            name="PokedexNavigator"
+            component={PokedexNavigation}
             options={{
-                tabBarLabel: '',
+                title: '',
+                headerTransparent: true,
                 tabBarIcon: () => ( renderPokeball() 
                 ),
                 headerTitleAlign: 'center',
