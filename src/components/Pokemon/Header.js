@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SafeAreaView, Text, StyleSheet, Image } from 'react-native';
+import { SafeAreaView, Text, StyleSheet, Image, View } from 'react-native';
 import getColorByPokemonType from '../../utils/getColorByPokemonType';
 
 export default function Header(props) {
@@ -20,7 +20,8 @@ export default function Header(props) {
     }
     
     return (
-        <SafeAreaView style={{ ...styles.container, backgroundColor: colors[0] }}>
+        <SafeAreaView style={styles.container}>
+            <View style={{ ...styles.bgStyle, backgroundColor: colors[0] }} />
             <Text style={styles.name}>
                 {name.charAt(0).toUpperCase() + name.slice(1)}
             </Text>
@@ -54,17 +55,30 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 10,
-        borderBottomLeftRadius: 30,
-        borderBottomRightRadius: 30,
-        overflow: 'hidden',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    bgStyle: {
+        position: 'absolute',
+        width: '100%',
+        height: 600,
+        borderBottomLeftRadius: 300,
+        borderBottomRightRadius: 300,
+        shadowRadius: 300,
+        shadowColor: '#000',
+        shadowOpacity: 0.5,
+        shadowOffset: { width: 0, height: 0 },
+        elevation: 5,
+        transform: [
+            { scaleX: 2 }
+        ],
     },
     name: {
         fontSize: 30,
         fontWeight: 'bold',
         textAlign: 'center',
         marginTop: 10,
+        color: 'white',
     },
     id: {
         fontSize: 20,
@@ -79,8 +93,8 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     image: {
-        width: 200,
-        height: 200,
+        width: 400,
+        height: 400,
         alignSelf: 'center',
         marginTop: 10,
     },
