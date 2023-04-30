@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 //  Get the pokemon details by id
 import { getPokemonDetailsByIdApi } from '../api/pokemon';
 //  Import components
 import Header from '../components/Pokemon/Header';
 import Types from '../components/Pokemon/Types';
+import Stats from '../components/Pokemon/Stats';
 
 export default function Pokemon(props) {
   const { navigation, route } = props;
@@ -26,7 +27,7 @@ export default function Pokemon(props) {
   if (!pokemon) return null;
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <Header 
         name={pokemon.name}
         types={pokemon.types}
@@ -37,6 +38,16 @@ export default function Pokemon(props) {
       <Types
         types={pokemon.types}
       />
+      <Stats
+        stats={pokemon.stats}
+      />
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#777',
+  },
+});
