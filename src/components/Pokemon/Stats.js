@@ -66,15 +66,18 @@ export default function Stats(props) {
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 20,
+        paddingVertical: 50,
+        marginLeft: 20,
+        marginRight: 20,
         marginTop: -10,
         marginBottom: 80,
         padding: 10,
         borderRadius: 10,
-        backgroundColor: 'white',
         shadowColor: '#000',
         shadowOpacity: 0.5,
         shadowOffset: { width: 0, height: 0 },
         elevation: 5,
+        backgroundColor: 'white',
     },
     title: {
         fontWeight: 'bold',
@@ -92,7 +95,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     blockStatVal: {
-        width: '70%',
+        width: '65%',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -100,6 +103,7 @@ const styles = StyleSheet.create({
     statValue: {
         width: '12%',
         fontSize: 16,
+        fontWeight: 'bold',
     },
     bgBar: {
         width: '88%',

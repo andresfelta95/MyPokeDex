@@ -48,6 +48,6 @@ export default function Pokemon(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#777',
+    backgroundColor: '#357',
   },
 });

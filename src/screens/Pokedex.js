@@ -45,7 +45,7 @@ export default function Pokemon() {
     }
   };
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ backgroundColor: '#159' }}>
       <PokemonList 
         pokemons={pokemons} 
         loadPokemons={loadPokemons}
