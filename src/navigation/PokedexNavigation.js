@@ -7,16 +7,29 @@ const Stack = createStackNavigator();
 
 export default function PokedexNavigation() {
   return (
-    <Stack.Navigator
+    <Stack.Navigator 
+      // make the header to do not overlap the notch
       screenOptions={{
-        headerShown: false,
+        headerStatusBarHeight: 0,
       }}
     >
       <Stack.Screen 
         name="Pokedex" 
         component={Pokedex}
+        options={{
+          title: '',
+          headerTransparent: true,
+        }}
       />
-      <Stack.Screen name="Pokemon" component={Pokemon} />
+      <Stack.Screen 
+        name="Pokemon" 
+        component={Pokemon}
+        options={{
+          title: '',
+          headerTransparent: true,
+          headerStatusBarHeight: 60,
+        }}
+      />
     </Stack.Navigator>
   );
 }

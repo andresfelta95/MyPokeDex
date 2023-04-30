@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-//  Get the pokemon details by id
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { getPokemonDetailsByIdApi } from '../api/pokemon';
 //  Import components
 import Header from '../components/Pokemon/Header';
@@ -12,6 +12,30 @@ export default function Pokemon(props) {
   const {id} = route.params;
 
   const [pokemon, setPokemon] = React.useState(null);
+
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Icon
+          name="heart"
+          color="#fff"
+          size={30}
+          style={{ marginRight: 20 }}
+          backgroundColor="transparent"
+          onPress={() => {console.log('Add to favorites')}}
+        />
+      ),
+      headerLeft: () => (
+        <Icon
+          name="arrow-left"
+          color="#fff"
+          size={30}
+          style={{ marginLeft: 20 }}
+          onPress={navigation.goBack}
+        />
+      ),
+    });
+  }, [navigation, route.params]);
 
   React.useEffect(() => {
     (async () => {
