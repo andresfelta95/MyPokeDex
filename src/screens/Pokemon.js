@@ -6,25 +6,20 @@ import { getPokemonDetailsByIdApi } from '../api/pokemon';
 import Header from '../components/Pokemon/Header';
 import Types from '../components/Pokemon/Types';
 import Stats from '../components/Pokemon/Stats';
+import Favorite from '../components/Pokemon/Favorite';
+//  Import hooks
+import useAuth from '../hooks/useAuth';
 
 export default function Pokemon(props) {
   const { navigation, route } = props;
   const {id} = route.params;
+  const { auth } = useAuth();
 
   const [pokemon, setPokemon] = React.useState(null);
 
   React.useEffect(() => {
     navigation.setOptions({
-      headerRight: () => (
-        <Icon
-          name="heart"
-          color="#fff"
-          size={30}
-          style={{ marginRight: 20 }}
-          backgroundColor="transparent"
-          onPress={() => {console.log('Add to favorites')}}
-        />
-      ),
+      headerRight: () => ( auth ? <Favorite id={id} /> : null ),
       headerLeft: () => (
         <Icon
           name="arrow-left"
@@ -35,7 +30,7 @@ export default function Pokemon(props) {
         />
       ),
     });
-  }, [navigation, route.params]);
+  }, [navigation, route.params, pokemon, auth]);
 
   React.useEffect(() => {
     (async () => {
@@ -49,6 +44,8 @@ export default function Pokemon(props) {
   }, [route.params]);
 
   if (!pokemon) return null;
+
+  
 
   return (
     <ScrollView style={styles.container}>
