@@ -20,11 +20,8 @@ export default function Favorite(props) {
     React.useEffect(() => {
         (async () => {
             try {
-                // Check if the pokemon is already in the favorite list
-                const response = await isPokemonFavoriteApi(id);
-                setIsFavorite(response);
                 // If the pokemon is already in the favorite list
-                if (response) {
+                if (isfavorite) {
                     // Set the heart color to red
                     setColor('#F44336');
                 }
@@ -36,6 +33,7 @@ export default function Favorite(props) {
             }
             catch (error) {
                 console.log(error);
+                setIsFavorite(false);
             }
         })()
     }, [id, isfavorite])
