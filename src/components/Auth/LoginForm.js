@@ -4,15 +4,29 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, Keyboard } from 'r
 import { useFormik } from 'formik';
 // Yup
 import * as Yup from 'yup';
+// import DB
+import { user, usersDetails } from '../../utils/userDB';
 
 export default function LoginForm() {
+
+    const [ error, setError ] = React.useState('');
 
     const formik = useFormik({
         initialValues: initialValues(),
         validationSchema: Yup.object(validationSchema()),
         validateOnChange: false,
         onSubmit: (formData) => {
-            console.log(formData);
+            const { username, password } = formData;
+            if (username === user.username && password === user.password) {
+                console.log('Login correcto');
+                console.log(usersDetails);
+                setError('');
+            } else {
+                setError('Username or password incorrect.');
+                console.log('Login incorrecto');
+            }
+
+            Keyboard.dismiss();
         }
     });
 
@@ -58,6 +72,10 @@ export default function LoginForm() {
 
             <Text style={styles.ErrorMessage}>
                 {formik.errors.password}
+            </Text>
+
+            <Text style={styles.ErrorMessage}>
+                {error}
             </Text>
 
         </View>
