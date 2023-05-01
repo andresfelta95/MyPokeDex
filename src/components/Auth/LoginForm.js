@@ -13,8 +13,6 @@ export default function LoginForm() {
     const [ error, setError ] = React.useState('');
     const { login } = useAuth();
 
-    console.log(useAuth());
-
     const formik = useFormik({
         initialValues: initialValues(),
         validationSchema: Yup.object(validationSchema()),
@@ -24,7 +22,6 @@ export default function LoginForm() {
             const { username, password } = formData;
 
             if (username === user.username && password === user.password) {
-                console.log(usersDetails);
                 login(usersDetails);
             } else {
                 setError('Username or password incorrect.');
