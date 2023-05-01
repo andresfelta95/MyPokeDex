@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FAVORITE_STORAGE } from "../utils/constants";
 import { includes } from "lodash";
 
-// Add a pokemon to favorite list
+// Add or remove a pokemon in the favorite list
 export async function addPokemonToFavoriteApi(pokemonId) {
   try {
     // Get favorite pokemon list
@@ -19,7 +19,6 @@ export async function addPokemonToFavoriteApi(pokemonId) {
         );
         return;
     }
-
     // Check if the pokemon is in the list
     const isPokemon = await isPokemonFavoriteApi(pokemonId);
 
