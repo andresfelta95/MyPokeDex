@@ -1,43 +1,83 @@
 import * as React from 'react';
-import {View, Text, StyleSheet, TextInput, TouchableOpacity, Keyboard} from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Keyboard } from 'react-native';
+// Formik
+import { useFormik } from 'formik';
+// Yup
+import * as Yup from 'yup';
 
 export default function LoginForm() {
-    
-      const auth = null;
-    
-      return (
-     <View style={styles.form}>
-        <Text style={styles.title}>
-            Login
-        </Text>
 
-        <TextInput
-            style={styles.input}
-            placeholder="Username"
-            placeholderTextColor="#969696"
-            autoCapitalize='none'
-        />
+    const formik = useFormik({
+        initialValues: initialValues(),
+        validationSchema: Yup.object(validationSchema()),
+        validateOnChange: false,
+        onSubmit: (formData) => {
+            console.log(formData);
+        }
+    });
 
-        <TextInput
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor="#969696"
-            secureTextEntry={true}
-            autoCapitalize='none'
-        />
+    const auth = null;
 
-        <TouchableOpacity
-            style={styles.button}
-            onPress={Keyboard.dismiss}
-        >
-            <Text style={{color: '#fff', fontSize: 18, textAlign: 'center'}}>
+    return (
+        <View style={styles.form}>
+            <Text style={styles.title}>
                 Login
             </Text>
-        </TouchableOpacity>
-        
-     </View>
-      );
+
+            <TextInput
+                style={styles.input}
+                placeholder="Username"
+                placeholderTextColor="#969696"
+                autoCapitalize='none'
+                value={formik.values.username}
+                onChangeText={(text) => formik.setFieldValue('username', text)}
+            />
+
+            <TextInput
+                style={styles.input}
+                placeholder="Password"
+                placeholderTextColor="#969696"
+                secureTextEntry={true}
+                autoCapitalize='none'
+                value={formik.values.password}
+                onChangeText={(text) => formik.setFieldValue('password', text)}
+            />
+
+            <TouchableOpacity
+                style={styles.button}
+                onPress={formik.handleSubmit}
+            >
+                <Text style={{ color: '#fff', fontSize: 18, textAlign: 'center' }}>
+                    Login
+                </Text>
+            </TouchableOpacity>
+
+            <Text style={styles.ErrorMessage}>
+                {formik.errors.username}
+            </Text>
+
+            <Text style={styles.ErrorMessage}>
+                {formik.errors.password}
+            </Text>
+
+        </View>
+    );
+}
+
+function initialValues() {
+    return {
+        username: '',
+        password: '',
     }
+}
+
+function validationSchema() {
+    return {
+        username: Yup.string().required('Username Required.').min(4, true).max(12, true), // 'true' to use the 'strict' mode
+        password: Yup.string().required('Password Required.').min(4, true),
+    }
+
+}
 
 
 const styles = StyleSheet.create({
@@ -70,5 +110,11 @@ const styles = StyleSheet.create({
         width: '80%',
         marginBottom: 20,
         paddingVertical: 10,
+    },
+    ErrorMessage: {
+        textAlign: 'center',
+        color: '#f00',
+        fontWeight: 'bold',
+        fontSize: 15,
     },
 });
