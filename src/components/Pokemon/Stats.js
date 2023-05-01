@@ -101,12 +101,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     statValue: {
-        width: '12%',
+        width: '15%',
         fontSize: 16,
         fontWeight: 'bold',
     },
     bgBar: {
-        width: '88%',
+        width: '85%',
         height: 10,
         backgroundColor: '#eee',
         borderRadius: 20,
