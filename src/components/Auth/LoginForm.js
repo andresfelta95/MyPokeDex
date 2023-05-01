@@ -102,7 +102,7 @@ function validationSchema() {
 
 const styles = StyleSheet.create({
     form: {
-        marginTop: 30,
+        marginTop: 50,
         alignItems: 'center',
     },
     title: {

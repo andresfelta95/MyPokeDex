@@ -21,8 +21,9 @@ export default function Navigation() {
                 tabBarIcon: ({ color, size }) => (
                     <Icon name="user" color={color} size={size} />
                 ),
-                headerTitle: 'My Account',
+                headerTitle: '',
                 headerTitleAlign: 'center',
+                headerTransparent: true,
                 }} 
         />
         <Tab.Screen

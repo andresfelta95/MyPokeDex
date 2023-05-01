@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 
 //  Import components
 import LoginForm from '../components/Auth/LoginForm';
@@ -12,7 +12,7 @@ export default function Account() {
   // const auth = null;
 
   return (
-    <View style={{backgroundColor: '#357', height: '100%'}}>
+    <View style={styles.container}>
       {auth ? (
         <UserData />
       ) : (
@@ -21,3 +21,11 @@ export default function Account() {
     </View>
   );
 }
+
+//  Styles
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#357',
+    height: '100%',
+  },
+});
