@@ -6,7 +6,8 @@ import { View, Text, StyleSheet } from 'react-native';
 
 export default function Stats(props) {
     const { stats } = props;
-
+    
+    // Function to set the color of the bar
     const barStyles = (base_stat) => {
         if (base_stat < 50) {
             return {
@@ -36,6 +37,26 @@ export default function Stats(props) {
         }
     };
 
+    // Function to set the name of the stat
+    const statName = (name) => {
+        switch (name) {
+            case 'hp':
+                return 'HP ❤️';
+            case 'attack':
+                return 'Attack ⚔️';
+            case 'defense':
+                return 'Defense 🛡️';
+            case 'special-attack':
+                return 'Sp. Atk. ⚔️✨';
+            case 'special-defense':
+                return 'Sp. Def. 🛡️✨';
+            case 'speed':
+                return 'Speed 🏃';
+            default:
+                return name;
+        }
+    };
+
     return (
         <View style={styles.container}>
         <Text style={styles.title}>Base Stats</Text>
@@ -46,7 +67,7 @@ export default function Stats(props) {
             >
                 <View style={{ width: '40%' }}>
                     <Text style={styles.statName}>
-                        {item.stat.name.charAt(0).toUpperCase() + item.stat.name.slice(1)}
+                        {statName(item.stat.name)}
                     </Text>
                 </View>
                 <View style={styles.blockStatVal}>
