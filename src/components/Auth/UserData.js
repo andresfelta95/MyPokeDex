@@ -1,11 +1,29 @@
 import * as React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-
+import { useFocusEffect } from '@react-navigation/native';
 // hooks
 import useAuth from '../../hooks/useAuth';
+// api
+import { getFavoritePokemonsApi } from '../../api/favorite';
 
 export default function UserData() {
    const { auth, logout } = useAuth();
+   const [numFavs, setNumFavs] = React.useState(0);
+
+   useFocusEffect(
+      React.useCallback(() => {
+         if (auth) {
+            (async () => {
+               try {
+                  const response = await getFavoritePokemonsApi();
+                  setNumFavs(response.length);
+               } catch (error) {
+                  console.log(error);
+                  throw error;
+               }
+            })();
+         }
+      }, [auth]));
 
    return (
       <View style={styles.container}>
@@ -22,7 +40,7 @@ export default function UserData() {
             <ItemMenu title="Username" text={auth.username} />
             <ItemMenu title="Email" text={auth.email} />
             <ItemMenu title="Phone" text={auth.phone} />
-            <ItemMenu title="TotalFavs" text={'0 Pokemons'} />
+            <ItemMenu title="TotalFavs" text={`${numFavs} pokemons`} />
          </View>
          <TouchableOpacity
             style={styles.button}
