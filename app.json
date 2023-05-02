@@ -26,6 +26,11 @@
     },
     "web": {
       "favicon": "./src/assets/pokeball.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f09be5fa-80b7-449f-8f88-db0a810521ae"
+      }
     }
   }
 }
