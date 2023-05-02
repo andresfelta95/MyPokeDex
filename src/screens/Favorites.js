@@ -1,17 +1,20 @@
 import * as React from 'react';
 import {SafeAreaView, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 // Api
 import { getFavoritePokemonsApi } from '../api/favorite';
+import { getPokemonDetailsByIdApi } from '../api/pokemon';
 // Hooks
 import useAuth from '../hooks/useAuth';
-// Screens
-import Account from './Account';
+// Components
+import PokemonList from '../components/PokemonList';
 
 
 export default function Favorites() { 
   const navigation = useNavigation();
   const { auth } = useAuth();
+  const [favorites, setFavorites] = React.useState([]);
 
   // Check if the user is logged in
   if (!auth) {
@@ -33,23 +36,34 @@ export default function Favorites() {
       </SafeAreaView>
     );
   }
-  const checkFavorite = async () => {
-    const response = await getFavoritePokemonsApi();
-    console.log(response);
-  }
 
-  // If the user is logged in  
+  useFocusEffect(
+    React.useCallback(() => {
+      (async () => {
+        try {
+          const response = await getFavoritePokemonsApi();
+  
+          const pokemonList = [];
+          for await (const id of response) {
+            const pokemonData = await getPokemonDetailsByIdApi(id);
+            pokemonList.push({
+              id: pokemonData.id,
+              name: pokemonData.name,
+              types: pokemonData.types[0].type.name,
+              order: pokemonData.order,
+              image: pokemonData.sprites.other['official-artwork'].front_default,
+            });
+          }
+          setFavorites(pokemonList);
+        } catch (error) {
+          console.log(error);
+          throw error;
+        }
+      })();
+    }, [auth]));
+  
   return (
-    <SafeAreaView style={styles.container}>
-      <Text>Favorites</Text>
-      <TouchableOpacity onPress={checkFavorite}>
-        <Text
-          style={styles.text}
-        >
-          Get favorites.
-        </Text>
-      </TouchableOpacity>
-    </SafeAreaView>
+    <PokemonList pokemons={favorites} />
   );
 }
 
