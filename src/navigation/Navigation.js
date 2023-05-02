@@ -18,8 +18,8 @@ export default function Navigation() {
             component={Account} 
             options={{ 
                 tabBarLabel: 'My Account',
-                tabBarIcon: ({ color, size }) => (
-                    <Icon name="user" color={color} size={size} />
+                tabBarIcon: ({ color, size, focused }) => (
+                    <Icon name="user" color={focused ? '#F00' : color} size={size} />
                 ),
                 headerTitle: '',
                 headerTitleAlign: 'center',
@@ -42,8 +42,8 @@ export default function Navigation() {
             component={FavoriteNavigation} 
             options={{
                 tabBarLabel: 'Favorites',
-                tabBarIcon: ({ color, size }) => (
-                    <Icon name="heart" color={color} size={size} />
+                tabBarIcon: ({ color, size, focused }) => (
+                    <Icon name="heart" color={focused ? '#F00' : color} size={size} />
                 ),
                 headerTitle: '',
                 headerTitleAlign: 'center',
