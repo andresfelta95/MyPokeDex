@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 //  Import screens
 import Account from '../screens/Account';
-import Favorites from '../screens/Favorites';
+import FavoriteNavigation from './FavoriteNavigation';
 import PokedexNavigation from './PokedexNavigation';
 
 const Tab = createBottomTabNavigator();
@@ -38,14 +38,16 @@ export default function Navigation() {
             }}
         />
         <Tab.Screen 
-            name="Favorites" 
-            component={Favorites} 
+            name="FavoriteNavigation" 
+            component={FavoriteNavigation} 
             options={{
                 tabBarLabel: 'Favorites',
                 tabBarIcon: ({ color, size }) => (
                     <Icon name="heart" color={color} size={size} />
                 ),
+                headerTitle: '',
                 headerTitleAlign: 'center',
+                headerTransparent: true,
             }}
         />
       </Tab.Navigator>

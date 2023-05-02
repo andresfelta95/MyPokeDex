@@ -16,53 +16,50 @@ export default function Favorites() {
   const { auth } = useAuth();
   const [favorites, setFavorites] = React.useState([]);
 
-  // Check if the user is logged in
-  if (!auth) {
-    return (
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.text}>
-          You must be logged in to see your favorites
-        </Text>
-        <TouchableOpacity 
-          style={styles.button}
-          onPress={() => navigation.navigate('Account')}
-        >
-          <Text
-            style={styles.buttonText}
-          >
-            Go to login
-          </Text>
-        </TouchableOpacity>
-      </SafeAreaView>
-    );
-  }
-
   useFocusEffect(
     React.useCallback(() => {
-      (async () => {
-        try {
-          const response = await getFavoritePokemonsApi();
-  
-          const pokemonList = [];
-          for await (const id of response) {
-            const pokemonData = await getPokemonDetailsByIdApi(id);
-            pokemonList.push({
-              id: pokemonData.id,
-              name: pokemonData.name,
-              types: pokemonData.types[0].type.name,
-              order: pokemonData.order,
-              image: pokemonData.sprites.other['official-artwork'].front_default,
-            });
+      if (auth) {
+        (async () => {
+          try {
+            const response = await getFavoritePokemonsApi();
+            console.log(response);    
+            const pokemonList = [];
+            for await (const id of response) {
+              const pokemonData = await getPokemonDetailsByIdApi(id);
+              pokemonList.push({
+                id: pokemonData.id,
+                name: pokemonData.name,
+                types: pokemonData.types[0].type.name,
+                order: pokemonData.order,
+                image: pokemonData.sprites.other['official-artwork'].front_default,
+              });
+            }
+            setFavorites(pokemonList);
+          } catch (error) {
+            console.log(error);
+            throw error;
           }
-          setFavorites(pokemonList);
-        } catch (error) {
-          console.log(error);
-          throw error;
-        }
-      })();
+        })();
+      }
     }, [auth]));
   
-  return (
+  return !auth ? (
+    <SafeAreaView style={styles.container}>
+    <Text style={styles.text}>
+      You must be logged in to see your favorites
+    </Text>
+    <TouchableOpacity 
+      style={styles.button}
+      onPress={() => navigation.navigate('Account')}
+    >
+      <Text
+        style={styles.buttonText}
+      >
+        Go to login
+      </Text>
+    </TouchableOpacity>
+    </SafeAreaView>
+    ) : (
     <PokemonList pokemons={favorites} />
   );
 }

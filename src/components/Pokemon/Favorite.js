@@ -6,7 +6,7 @@ import { addPokemonToFavoriteApi, isPokemonFavoriteApi } from '../../api/favorit
 export default function Favorite(props) {
     const { id } = props;
     const [isfavorite, setIsFavorite] = React.useState(false);
-    const [color, setColor] = React.useState('#fff');
+    const [color, setColor] = React.useState('#F00');
 
 
     const addFavorite = async () => {
@@ -20,6 +20,8 @@ export default function Favorite(props) {
     React.useEffect(() => {
         (async () => {
             try {
+                const response = await isPokemonFavoriteApi(id);
+                setIsFavorite(response);
                 // If the pokemon is already in the favorite list
                 if (isfavorite) {
                     // Set the heart color to red
@@ -36,11 +38,12 @@ export default function Favorite(props) {
                 setIsFavorite(false);
             }
         })()
-    }, [id, isfavorite])
+    }, [id, isfavorite ])
 
     return (
         <Icon
         name="heart"
+        solid={isfavorite}
         color={color}
         size={40}
         onPress={addFavorite}
