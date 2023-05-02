@@ -7,7 +7,7 @@
     "icon": "./src/assets/pokeball.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splah.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
