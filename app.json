@@ -18,7 +18,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "AndresTangarife",
+      "package": "com.github.andresfelta95.MyPokeDex",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
