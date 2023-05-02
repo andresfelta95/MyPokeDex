@@ -60,7 +60,9 @@ export default function Favorites() {
     </TouchableOpacity>
     </SafeAreaView>
     ) : (
-    <PokemonList pokemons={favorites} />
+    <SafeAreaView style={styles.container}>
+      <PokemonList pokemons={favorites} />
+    </SafeAreaView>
   );
 }
 
