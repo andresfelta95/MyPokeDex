@@ -2,7 +2,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Key to store favorite pokemon
 import { FAVORITE_STORAGE } from "../utils/constants";
-import { includes } from "lodash";
 
 // Add or remove a pokemon in the favorite list
 export async function addPokemonToFavoriteApi(pokemonId) {
@@ -20,10 +19,10 @@ export async function addPokemonToFavoriteApi(pokemonId) {
         return;
     }
     // Check if the pokemon is in the list
-    const isPokemon = await isPokemonFavoriteApi(pokemonId);
+    const index = favoritePokemons.indexOf(pokemonId);
 
     // If the pokemon is not in the list
-    if (!isPokemon) {
+    if (index === -1) {
         // Add the pokemon to the list
         favoritePokemons.push(pokemonId);
         // Update the list
@@ -46,8 +45,11 @@ export async function addPokemonToFavoriteApi(pokemonId) {
 // Get favorite pokemon list
 export async function getFavoritePokemonsApi() {
     try {
-        const response = await AsyncStorage.getItem(FAVORITE_STORAGE);
-        return JSON.parse(response || []);
+        // Get the list
+        const favoritePokemons = await AsyncStorage.getItem(FAVORITE_STORAGE);
+        console.log(favoritePokemons);
+        // Return the list
+        return JSON.parse(favoritePokemons);
     } catch (error) {
         console.log(error);
         throw error;
@@ -65,8 +67,18 @@ export async function isPokemonFavoriteApi(pokemonId) {
             return false;
         }
 
-        // If there is a favorite pokemon list
-        return includes(favoritePokemons, pokemonId);
+        // Check if the pokemon is in the list
+        const index = favoritePokemons.indexOf(pokemonId);
+
+        // If the pokemon is in the list
+        if (index > -1) {
+            return true;
+        }
+        // If the pokemon is not in the list
+        else {
+            return false;
+        }
+
     } catch (error) {
         console.log(error);
         throw error;
